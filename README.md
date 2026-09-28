@@ -19,7 +19,7 @@ Global commodities trade data often suffers from fragmented reporting across vol
 
 ## Key Business Insights
 
-1. **Top Net Exporters:** Sri Lanka and China dominate global net trade balances with Sri Lanka demonstrating exceptional export-to-production alignment.
+1. **Top Net Exporters:** Kenya and China dominate global net trade balances with Kenya demonstrating exceptional export-to-production alignment.
 2. **Trade Deficit Highlights:** Major global transit hubs and consuming regions (e.g., Hong Kong SAR, UK, UAE) show consistent trade deficits , reflecting heavy reliance on primary producing countries.
 3. **Unit Economics and Pricing Discrepancies:** Calculating the Implied Export Price per unit reveals stark operational contrasts that is, bulk raw commodity exporters average \$2,000-\$2,500/unit, whereas value-add and re-export centers realize premium values exceeding \$8,000+/unit.
 
