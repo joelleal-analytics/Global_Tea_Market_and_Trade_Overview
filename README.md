@@ -76,3 +76,21 @@ During data validation and cross-entity inspection, an interesting reporting ano
 * Observation: **China, Mainland** generated **$24B Trade Balance** but showed zero Primary Production Quantity in coutry-level filtering.
 * Root Cause Analysis: Direct inspection if Fact_Table_Tea_Data revealed that FAOSTAT reports trade metrics (Import/Export) under specific custom territories (e.g., China Mainland, China Hon Kong SAR, China Taiwan Province, and China Macao SAR), whereas primary harvest production quantity is aggreagated under the parent entity label (i.e., China).
 * Engineering Recommendation: In an enterprise ETL production environment, an entity-resolution mapping layer (using standardized ISO alpha-3 country codes) should be applied prior to loading into the star schema to merge territorial production into the parent/mainland customs boundary seamlessly.
+
+## Conclusion and Next Steps
+
+This project delivers a complete end-to-end analytics solution, transforming fragmented multi-decade trade datasets into an executive-ready Power BI dashboard. By pairing structured Star Schema modeling with targeted DAX logic, the report successfully uncovered critical market dynamics, net trade balances, and pricing anomalies across global tea supply chains. Furthermore, proactive data auditing revealed key reporting discrepancies in international commodity statistics, highlighting the importance of robust ETL governance in enterprise reporting.
+
+### Potential Future Enhancements:
+* Automated Data Pipeline: Build a Python or SQL ETL script to automatically fetch and standardize updated FAOSTAT datasets annually.
+* ISO Country Mapping: Implement an automated ISO 3166-1 alpha-3 crosswalk table to handle regional/parent country aggregation discrepancies programmatically.
+* Predictive Forecasting: Incorporate time-series forecasting models in Power BI to project global tea yield and trade balance trends over the next 5-10 years.
+
+---
+
+#### Design System and Palette
+
+* Header and Positive Accent: #2E3A24 (Dark olive green)
+* Negative Accent: #B84A39 (Terracotta red)
+* Canvass Background: #FAF8F4 (Warm neutral)
+* Containers: #FFFFFF (White)
