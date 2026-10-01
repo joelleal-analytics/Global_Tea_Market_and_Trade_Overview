@@ -19,7 +19,7 @@ Global commodities trade data often suffers from fragmented reporting across vol
 
 ## Key Business Insights
 
-1. **Top Net Exporters:** Kenya and China dominate global net trade balances with Kenya demonstrating exceptional export-to-production alignment.
+1. **Top Net Exporters:** Sri Lanka and China, Mainland dominate global net trade balances with Sri Lanka demonstrating exceptional export-to-production alignment.
 2. **Trade Deficit Highlights:** Major global transit hubs and consuming regions (e.g., Hong Kong SAR, UK, UAE) show consistent trade deficits , reflecting heavy reliance on primary producing countries.
 3. **Unit Economics and Pricing Discrepancies:** Calculating the Implied Export Price per unit reveals stark operational contrasts that is, bulk raw commodity exporters average \$2,000-\$2,500/unit, whereas value-add and re-export centers realize premium values exceeding \$8,000+/unit.
 
@@ -30,6 +30,29 @@ The data was transformed and structured into a standard **Star Schema** to optim
 * **`Fact_Global_Tea_Data`**: Unpivoted and standardized fact table containing metrics for Production Quantity, Export Quantity, Import Quantity, Export Value, and Import Value.
 * **`Dim_Year`**: Continuous year dimension that enables seamless time-series filtering.
 * **`Dim_Country`**: Dimension table containing unique countries and regional custom territories.
+
+## SQL Analysis and Query Logic
+
+Prior to building the Power BI report, ad-hoc SQL exploratory analysis was conducted in MySQL to address core trade questions. The full scripts are available in the [sql_analysis_query_and_query_tables](https://github.com/joelleal-analytics/Global_Tea_Market_and_Trade_Overview/tree/main/sql_analysis_query_and_query_tables) directory.
+
+### Key Queries Executed
+1. Database and Dimension setup [`00_schema_and_dim_date_setup.sql`](https://github.com/joelleal-analytics/Global_Tea_Market_and_Trade_Overview/blob/main/sql_analysis_query_and_query_tables/sql_analysis/00_schema_and_dim_date_setup.sql)\
+   Built table structures and generated date dimensions to enforce star schema normalization.
+
+2. Net Trade Balance Analysis [`01_trade_analysis.sql`](https://github.com/joelleal-analytics/Global_Tea_Market_and_Trade_Overview/blob/main/sql_analysis_query_and_query_tables/sql_analysis/01_trade_analysis.sql)\
+   Business intent: Identify top net exporters and net importers using `DENSE_RANK()` and conditional aggreagation (`CASE WHEN`).
+
+3. Pricing Power and Unit Economics [`02_pricing_and_unit_economics.sql`](https://github.com/joelleal-analytics/Global_Tea_Market_and_Trade_Overview/blob/main/sql_analysis_query_and_query_tables/sql_analysis/02_pricing_and_unit_economics.sql)\
+   Business intent: Calculated implied export price per unit while handling potential division-by-zero errors via `NULLIF()` and       `COALESCE()`. Filtered low-volume noise using `HAVING total_export_quantity >= 100000`.
+
+4. YoY Growth and Volatility Tracking [`03_yoy_growth_and_volatility.sql`](https://github.com/joelleal-analytics/Global_Tea_Market_and_Trade_Overview/blob/main/sql_analysis_query_and_query_tables/sql_analysis/03_yoy_growth_volatility.sql)\
+   Business intent: Calculated year-over-year export growth rates per country.
+   Key logic snippet: Utilized `LAG()`partitioned by country to compare annual performance directly against prior years:
+```sql
+LAG(
+  SUM(CASE WHEN Metric = 'Export Quantity' THEN Value ELSE 0 END),
+1) OVER (PARTITION BY Country ORDER BY Year) AS prior_year_export_quantity
+```
 
 ## Key DAX Measures and Logic
 
