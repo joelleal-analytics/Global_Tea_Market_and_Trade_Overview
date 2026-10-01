@@ -1,0 +1,11 @@
+country,total_export_value,total_import_value,net_trade_balance,category
+"Sri Lanka",28158565000,457236000,27701329000,"Top Exporter"
+"China, Mainland",23277816000,1554875000,21722941000,"Top Exporter"
+Kenya,22088048000,947277000,21140771000,"Top Exporter"
+India,16730426000,870775000,15859651000,"Top Exporter"
+Indonesia,3864692000,419201000,3445491000,"Top Exporter"
+Iran,346937000,5003222000,-4656285000,"Top Importer"
+Egypt,272579000,5550455000,-5277876000,"Top Importer"
+"United States",1696281000,9475983000,-7779702000,"Top Importer"
+Pakistan,181444000,9254470000,-9073026000,"Top Importer"
+Russia,1375888000,13067320000,-11691432000,"Top Importer"
